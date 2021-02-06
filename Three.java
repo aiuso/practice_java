@@ -104,42 +104,83 @@ public class Three {
 
     // ################################################################################################################
 
+    public static void speedOfSoundAlt() {
+        Scanner scan = new Scanner(System.in);
+        String error = "Not a valid entry. Try again.";
+        double distance;
+        double seconds = 0;
+
+        // Declare constants
+        int AIR_FEETSEC = 1100;
+        int WATER_FEETSEC = 4900;
+        int STEEL_FEETSEC = 1640;
+
+
+        System.out.println("Medium sound will travel through. (Air, Water, or Steel)");
+        String medium = scan.next().strip().toLowerCase();
+
+        // Check String for appropriate input.
+        if (medium.equals("air") || medium.equals("water") || medium.equals("steel")) {
+            System.out.println("Enter the distance (feet) needed to travel.");
+
+            distance = scan.nextDouble();
+
+            if (medium.equals("air")) {
+                seconds = distance / AIR_FEETSEC;
+            } else if (medium.equals("water")) {
+                seconds = distance / WATER_FEETSEC;
+            } else if (medium.equals("steel")) {
+                seconds = distance / STEEL_FEETSEC;
+            }
+
+            System.out.println(String.format("Sound will take %.2f seconds " +
+                            "to travel %s feet through %s.",
+                    seconds, distance, medium));
+
+        // If medium != air || water || steel, restart function.
+        } else {
+            System.out.println(error);
+            speedOfSoundAlt();
+        }
+    }
+
+
     public static void speedOfSound() {
         Scanner scan = new Scanner(System.in);
-        double distance;
-        double time;
         String error = "Not a valid entry. Try again.";
+        double distance;
+        double seconds;
 
+        HashMap<String, Integer> dict = new HashMap<String, Integer>();
+        dict.put("air", 1100);      // sound velocity (ft/s) in air
+        dict.put("water", 4900);    // sound velocity (ft/s) in water
+        dict.put("steel", 16400);   // sound velocity (ft/s) in steel
 
-        Map<String, Integer> dict = new HashMap<String, Integer>();
-        dict.put("air", 1100);
-        dict.put("water", 4900);
-        dict.put("steel", 16400);
+        System.out.println("Medium sound will travel through. (Air, Water, or Steel)");
+        String medium = scan.next().strip().toLowerCase();
 
+        if (medium.equals("air") || medium.equals("water") || medium.equals("steel")) {
+            System.out.println("Enter the distance (feet) needed to travel.");
 
-        while (true) {
-            System.out.println("Enter the medium. (Air, Water, or Steel)");
-            String input = scan.next().strip();
+            while (true) {
+                try {
+                    distance = scan.nextDouble();
+                    seconds = distance / dict.get(medium);
 
-            if (input.equals("air") || input.equals("water") || input.equals("steel")) {
-                System.out.println("Enter the distance (feet) needed to travel");
+                    System.out.println(String.format("Sound will take %.2f seconds " +
+                                    "to travel %s feet through %s.",
+                            seconds, distance, medium));
+                    break;
 
-                while (true) {
-                    try {
-                        distance = scan.nextDouble();
-                        time = distance / dict.get(input);
-                        System.out.println(String.format("It will take %s seconds" +
-                                        "to tavel %s feet in a %s medium",
-                                time, distance, input));
-                        break;
-                    } catch (Exception e) {
-                        System.out.println(error);
-                    }
+                } catch (Exception e) {
+                    System.out.println(error);
+                    speedOfSound();
                 }
-
-            } else {
-                System.out.println(error);
             }
+
+        } else {
+            System.out.println(error);
+            speedOfSound();
         }
     }
 
