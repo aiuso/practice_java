@@ -62,7 +62,7 @@ public class Three {
 
     // ################################################################################################################
 
-    public static void testScoreGrader(){
+    public static void testScoreGrader() {
         Scanner scan = new Scanner(System.in);
         String error = "One or more of your scores are invalid";
         int testScores[] = new int[3];
@@ -79,9 +79,9 @@ public class Three {
                 }
                 avgScore /= numberOfTests;
 
-                if (90 <= avgScore && avgScore <= 100){
+                if (90 <= avgScore && avgScore <= 100) {
                     System.out.println("Your grade is an 'A'");
-                } else if (80 <= avgScore && avgScore <= 90){
+                } else if (80 <= avgScore && avgScore <= 90) {
                     System.out.println("Your grade is an 'B'");
                 } else if (70 <= avgScore && avgScore <= 80) {
                     System.out.println("Your grade is an 'C'");
@@ -93,7 +93,7 @@ public class Three {
                     System.out.println(error);
                     Three.testScoreGrader();
                 }
-            break;
+                break;
 
             } catch (Exception e) {
                 System.out.println(error);
@@ -137,7 +137,7 @@ public class Three {
                             "to travel %s feet through %s.",
                     seconds, distance, medium));
 
-        // If medium != air || water || steel, restart function.
+            // If medium != air || water || steel, restart function.
         } else {
             System.out.println(error);
             speedOfSoundAlt();
@@ -277,7 +277,34 @@ public class Three {
 
     // ################################################################################################################
 
+    public static void checkTemp() {
+        //Variable declaration
+        double temp = 0;
 
+        //Instantiating a Scanner object to get user input
+        Scanner scan = new Scanner(System.in);
+
+        //Get temperature from user
+        System.out.print("Enter a temperature:  ");
+        temp = scan.nextInt();
+
+        //Display message based on temperature
+        if (temp <= 32)
+            System.out.println("It's freezing.");
+
+        else if (temp < 50)
+            System.out.println("It's cold.");
+
+        else if (temp < 80)
+            System.out.println("It's warm.");
+
+        else if (temp < 100)
+            System.out.println("It's hot.");
+
+        else
+            System.out.println("It's extremely hot!");
+
+    }
 }
 
 

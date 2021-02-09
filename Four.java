@@ -19,7 +19,49 @@ public class Four {
         }
 
         System.out.println(sum);
+    }
 
+    public static void distanceTraveled() {
+        System.out.println("This function will take " +
+                "speed (MPH) and time traveled and " +
+                "determine distance traveled for each hour travel.");
+        int speed = 0;
+        int time = 0;
+        int distance = 0;
 
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Speed in MPH?");
+
+        // Input validation
+        while (true) {
+            try {
+                speed = scan.nextInt();
+
+                if (speed > 0 ) {
+                    System.out.println("How many hours were traveled?");
+                    time = scan.nextInt();
+                    break;
+
+                } else {
+                    System.out.println("Speed must be positive value");
+                    distanceTraveled();
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid input. Try again.");
+                distanceTraveled();
+            }
+        }
+
+        // Output
+        System.out.println("Hour \tDistance Traveled \n" +
+                "-------------------------");
+        for (int hour = 1; hour <= time; hour++) {
+            distance += (speed * hour);
+            System.out.println(hour + "\t\t" + distance + " miles");
+        }
+    }
+
+    public static void writeDistanceToFile() {
+        distanceTraveled();
     }
 }
