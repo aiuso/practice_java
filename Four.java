@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.io.PrintWriter;
 import java.util.IntSummaryStatistics;
 import java.util.Scanner;
 import java.util.stream.IntStream;
@@ -22,6 +24,10 @@ public class Four {
     }
 
     public static void distanceTraveled() {
+        String filename = JOptionPane.showInputDialog("Enter filename");
+        //PrintWriter document = new PrintWriter(filename);
+
+
         System.out.println("This function will take " +
                 "speed (MPH) and time traveled and " +
                 "determine distance traveled for each hour travel.");
