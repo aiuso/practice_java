@@ -2,8 +2,7 @@ import javax.swing.*;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 
-public class QuestionGenerator extends JApplet {
-
+public class QuestionGenerator {
 
     public static void stockDilutions() {
 
@@ -97,7 +96,6 @@ public class QuestionGenerator extends JApplet {
                 childGenotype);
 
 
-
         // Initializing Punnett Square with Parent Alleles
         punnettSquare[0][1] = maleGenotypeValues[0];
         punnettSquare[0][2] = maleGenotypeValues[1];
@@ -133,46 +131,41 @@ public class QuestionGenerator extends JApplet {
         System.out.println("test");
 
 
-
         }
 
     private static String[][] punnettSquareGenotype(int[][] punnetSquare, String letter) {
         String[][] punnettAnswerKey = new String[3][3];
         punnettAnswerKey[0][0] = "_";
 
-        for (int i = 0, j = 1; j < punnetSquare.length; j++) {
-                switch (punnetSquare[i][j]) {
-                    case 0:
-                        punnettAnswerKey[i][j] = letter.toLowerCase();
-                        break;
-                    case 1:
-                        punnettAnswerKey[i][j] = letter.toUpperCase();
-                        break;
-                }
+        // Character Output for Parent Alleles
+        for (int i = 0, j = 2, n = 0; n < 4; n++) {
+            if (j <= 0)
+                i++;
+
+            if (punnetSquare[i][j] == 0)
+                punnettAnswerKey[i][j] = letter.toLowerCase();
+            else
+                punnettAnswerKey[i][j] = letter.toUpperCase();
+
+            if (j != 0)
+                j--;
             }
 
-        for (int i = 1, j = 0; i < punnetSquare.length; i++) {
-            switch (punnetSquare[i][j]) {
-                case 0:
-                    punnettAnswerKey[i][j] = letter.toLowerCase();
-                    break;
-                case 1:
-                    punnettAnswerKey[i][j] = letter.toUpperCase();
-                    break;
-            }
-        }
-
+        // Character Output for Possible Child Genotypes
         for (int n = 1; n < punnetSquare.length; n++) {
             for (int m = 1; m < punnetSquare.length; m++)
                 switch (punnetSquare[n][m]) {
                     case 0:
-                        punnettAnswerKey[n][m] = letter.toLowerCase() + letter.toLowerCase();
+                        punnettAnswerKey[n][m] =
+                                letter.toLowerCase() + letter.toLowerCase();
                         break;
                     case 1:
-                        punnettAnswerKey[n][m] = letter.toUpperCase() + letter.toLowerCase();
+                        punnettAnswerKey[n][m] =
+                                letter.toUpperCase() + letter.toLowerCase();
                         break;
                     case 2:
-                        punnettAnswerKey[n][m] = letter.toUpperCase() + letter.toUpperCase();
+                        punnettAnswerKey[n][m] =
+                                letter.toUpperCase() + letter.toUpperCase();
                         break;
                 }
         }
@@ -220,7 +213,6 @@ public class QuestionGenerator extends JApplet {
 
 
     private static int[][] calculatePunnettSqaure(int[][] matrix) {
-
         for (int i = 1; i < matrix.length; i++) {
             for (int j = 1; j < matrix.length; j++) {
                 matrix[i][j] = matrix[i - i][j] + matrix[i][j - j];
@@ -254,7 +246,6 @@ public class QuestionGenerator extends JApplet {
     private static int[] generateGenotype() {
         int[] parent = new int[2];
         int genotypeValue = numGenerator(0, 2);
-
         switch (genotypeValue) {
             case 0:
                 parent[0] = 0;
@@ -269,7 +260,6 @@ public class QuestionGenerator extends JApplet {
                 parent[1] = 1;
                 break;
         }
-
         return parent;
     }
 
